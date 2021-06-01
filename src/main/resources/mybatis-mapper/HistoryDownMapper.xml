@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cassiopeia.stock.mapper.HistoryDownMapper">
+  <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.HistoryDown">
+    <id column="pk_history_down" jdbcType="INTEGER" property="pkHistoryDown" />
+    <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="in_date" jdbcType="VARCHAR" property="inDate" />
+    <result column="in_price" jdbcType="DOUBLE" property="inPrice" />
+    <result column="history_len" jdbcType="INTEGER" property="historyLen" />
+    <result column="delta_pct" jdbcType="DOUBLE" property="deltaPct" />
+    <result column="his_down_price" jdbcType="DOUBLE" property="hisDownPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pk_history_down, ts_code, in_date, in_price, history_len, delta_pct, his_down_price
+  </sql>
+  <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.HistoryDownExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from history_down
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from history_down
+    where pk_history_down = #{pkHistoryDown,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from history_down
+    where pk_history_down = #{pkHistoryDown,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.HistoryDownExample">
+    delete from history_down
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+    insert into history_down (pk_history_down, ts_code, in_date, 
+      in_price, history_len, delta_pct, 
+      his_down_price)
+    values (#{pkHistoryDown,jdbcType=INTEGER}, #{tsCode,jdbcType=VARCHAR}, #{inDate,jdbcType=VARCHAR}, 
+      #{inPrice,jdbcType=DOUBLE}, #{historyLen,jdbcType=INTEGER}, #{deltaPct,jdbcType=DOUBLE}, 
+      #{hisDownPrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+    insert into history_down
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkHistoryDown != null">
+        pk_history_down,
+      </if>
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="inDate != null">
+        in_date,
+      </if>
+      <if test="inPrice != null">
+        in_price,
+      </if>
+      <if test="historyLen != null">
+        history_len,
+      </if>
+      <if test="deltaPct != null">
+        delta_pct,
+      </if>
+      <if test="hisDownPrice != null">
+        his_down_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkHistoryDown != null">
+        #{pkHistoryDown,jdbcType=INTEGER},
+      </if>
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inDate != null">
+        #{inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        #{inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="historyLen != null">
+        #{historyLen,jdbcType=INTEGER},
+      </if>
+      <if test="deltaPct != null">
+        #{deltaPct,jdbcType=DOUBLE},
+      </if>
+      <if test="hisDownPrice != null">
+        #{hisDownPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cassiopeia.stock.beans.HistoryDownExample" resultType="java.lang.Long">
+    select count(*) from history_down
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update history_down
+    <set>
+      <if test="record.pkHistoryDown != null">
+        pk_history_down = #{record.pkHistoryDown,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inDate != null">
+        in_date = #{record.inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inPrice != null">
+        in_price = #{record.inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.historyLen != null">
+        history_len = #{record.historyLen,jdbcType=INTEGER},
+      </if>
+      <if test="record.deltaPct != null">
+        delta_pct = #{record.deltaPct,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hisDownPrice != null">
+        his_down_price = #{record.hisDownPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update history_down
+    set pk_history_down = #{record.pkHistoryDown,jdbcType=INTEGER},
+      ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      in_date = #{record.inDate,jdbcType=VARCHAR},
+      in_price = #{record.inPrice,jdbcType=DOUBLE},
+      history_len = #{record.historyLen,jdbcType=INTEGER},
+      delta_pct = #{record.deltaPct,jdbcType=DOUBLE},
+      his_down_price = #{record.hisDownPrice,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+    update history_down
+    <set>
+      <if test="tsCode != null">
+        ts_code = #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inDate != null">
+        in_date = #{inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        in_price = #{inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="historyLen != null">
+        history_len = #{historyLen,jdbcType=INTEGER},
+      </if>
+      <if test="deltaPct != null">
+        delta_pct = #{deltaPct,jdbcType=DOUBLE},
+      </if>
+      <if test="hisDownPrice != null">
+        his_down_price = #{hisDownPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where pk_history_down = #{pkHistoryDown,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+    update history_down
+    set ts_code = #{tsCode,jdbcType=VARCHAR},
+      in_date = #{inDate,jdbcType=VARCHAR},
+      in_price = #{inPrice,jdbcType=DOUBLE},
+      history_len = #{historyLen,jdbcType=INTEGER},
+      delta_pct = #{deltaPct,jdbcType=DOUBLE},
+      his_down_price = #{hisDownPrice,jdbcType=DOUBLE}
+    where pk_history_down = #{pkHistoryDown,jdbcType=INTEGER}
+  </update>
+</mapper>

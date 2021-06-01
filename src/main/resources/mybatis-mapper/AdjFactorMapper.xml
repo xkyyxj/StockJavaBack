@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cassiopeia.stock.mapper.AdjFactorMapper">
+    <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.AdjFactor">
+        <id column="ts_code" jdbcType="VARCHAR" property="tsCode"/>
+        <id column="trade_date" jdbcType="VARCHAR" property="tradeDate"/>
+        <result column="adj_factor" jdbcType="DOUBLE" property="adjFactor"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        ts_code
+        , trade_date, adj_factor
+    </sql>
+    <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.AdjFactorExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from adj_factor
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AdjFactorKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from adj_factor
+        where ts_code = #{tsCode,jdbcType=VARCHAR}
+        and trade_date = #{tradeDate,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AdjFactorKey">
+        delete
+        from adj_factor
+        where ts_code = #{tsCode,jdbcType=VARCHAR}
+          and trade_date = #{tradeDate,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.AdjFactorExample">
+        delete from adj_factor
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+        insert into adj_factor (ts_code, trade_date, adj_factor)
+        values (#{tsCode,jdbcType=VARCHAR}, #{tradeDate,jdbcType=VARCHAR}, #{adjFactor,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+        insert into adj_factor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tsCode != null">
+                ts_code,
+            </if>
+            <if test="tradeDate != null">
+                trade_date,
+            </if>
+            <if test="adjFactor != null">
+                adj_factor,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tsCode != null">
+                #{tsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeDate != null">
+                #{tradeDate,jdbcType=VARCHAR},
+            </if>
+            <if test="adjFactor != null">
+                #{adjFactor,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cassiopeia.stock.beans.AdjFactorExample" resultType="java.lang.Long">
+        select count(*) from adj_factor
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update adj_factor
+        <set>
+            <if test="record.tsCode != null">
+                ts_code = #{record.tsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tradeDate != null">
+                trade_date = #{record.tradeDate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.adjFactor != null">
+                adj_factor = #{record.adjFactor,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update adj_factor
+        set ts_code = #{record.tsCode,jdbcType=VARCHAR},
+        trade_date = #{record.tradeDate,jdbcType=VARCHAR},
+        adj_factor = #{record.adjFactor,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+        update adj_factor
+        <set>
+            <if test="adjFactor != null">
+                adj_factor = #{adjFactor,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where ts_code = #{tsCode,jdbcType=VARCHAR}
+        and trade_date = #{tradeDate,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+        update adj_factor
+        set adj_factor = #{adjFactor,jdbcType=DOUBLE}
+        where ts_code = #{tsCode,jdbcType=VARCHAR}
+          and trade_date = #{tradeDate,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into adj_factor(
+        <include refid="Base_Column_List"/>
+        ) values
+        <foreach collection="list" item="adjFactor" separator=",">
+            (
+            #{adjFactor.tsCode},
+            #{adjFactor.tradeDate},
+            #{adjFactor.tsCode}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cassiopeia.stock.mapper.EmaValueMapper">
+  <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.EmaValue">
+    <id column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <id column="trade_date" jdbcType="VARCHAR" property="tradeDate" />
+    <result column="ema_3" jdbcType="DOUBLE" property="ema3" />
+    <result column="ema_4" jdbcType="DOUBLE" property="ema4" />
+    <result column="ema_5" jdbcType="DOUBLE" property="ema5" />
+    <result column="ema_6" jdbcType="DOUBLE" property="ema6" />
+    <result column="ema_7" jdbcType="DOUBLE" property="ema7" />
+    <result column="ema_8" jdbcType="DOUBLE" property="ema8" />
+    <result column="ema_9" jdbcType="DOUBLE" property="ema9" />
+    <result column="ema_10" jdbcType="DOUBLE" property="ema10" />
+    <result column="ema_11" jdbcType="DOUBLE" property="ema11" />
+    <result column="ema_12" jdbcType="DOUBLE" property="ema12" />
+    <result column="ema_13" jdbcType="DOUBLE" property="ema13" />
+    <result column="ema_14" jdbcType="DOUBLE" property="ema14" />
+    <result column="ema_15" jdbcType="DOUBLE" property="ema15" />
+    <result column="ema_16" jdbcType="DOUBLE" property="ema16" />
+    <result column="ema_17" jdbcType="DOUBLE" property="ema17" />
+    <result column="ema_18" jdbcType="DOUBLE" property="ema18" />
+    <result column="ema_19" jdbcType="DOUBLE" property="ema19" />
+    <result column="ema_20" jdbcType="DOUBLE" property="ema20" />
+    <result column="ema_21" jdbcType="DOUBLE" property="ema21" />
+    <result column="ema_22" jdbcType="DOUBLE" property="ema22" />
+    <result column="ema_23" jdbcType="DOUBLE" property="ema23" />
+    <result column="ema_24" jdbcType="DOUBLE" property="ema24" />
+    <result column="ema_25" jdbcType="DOUBLE" property="ema25" />
+    <result column="ema_26" jdbcType="DOUBLE" property="ema26" />
+    <result column="ema_27" jdbcType="DOUBLE" property="ema27" />
+    <result column="ema_28" jdbcType="DOUBLE" property="ema28" />
+    <result column="ema_29" jdbcType="DOUBLE" property="ema29" />
+    <result column="ema_30" jdbcType="DOUBLE" property="ema30" />
+    <result column="ema_35" jdbcType="DOUBLE" property="ema35" />
+    <result column="ema_40" jdbcType="DOUBLE" property="ema40" />
+    <result column="ema_45" jdbcType="DOUBLE" property="ema45" />
+    <result column="ema_50" jdbcType="DOUBLE" property="ema50" />
+    <result column="ema_55" jdbcType="DOUBLE" property="ema55" />
+    <result column="ema_60" jdbcType="DOUBLE" property="ema60" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ts_code, trade_date, ema_3, ema_4, ema_5, ema_6, ema_7, ema_8, ema_9, ema_10, ema_11, 
+    ema_12, ema_13, ema_14, ema_15, ema_16, ema_17, ema_18, ema_19, ema_20, ema_21, ema_22, 
+    ema_23, ema_24, ema_25, ema_26, ema_27, ema_28, ema_29, ema_30, ema_35, ema_40, ema_45, 
+    ema_50, ema_55, ema_60
+  </sql>
+  <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.EmaValueExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ema_value
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.cassiopeia.stock.beans.EmaValueKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ema_value
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+      and trade_date = #{tradeDate,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.cassiopeia.stock.beans.EmaValueKey">
+    delete from ema_value
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+      and trade_date = #{tradeDate,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.EmaValueExample">
+    delete from ema_value
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cassiopeia.stock.beans.EmaValue">
+    insert into ema_value (ts_code, trade_date, ema_3, 
+      ema_4, ema_5, ema_6, ema_7, 
+      ema_8, ema_9, ema_10, ema_11, 
+      ema_12, ema_13, ema_14, ema_15, 
+      ema_16, ema_17, ema_18, ema_19, 
+      ema_20, ema_21, ema_22, ema_23, 
+      ema_24, ema_25, ema_26, ema_27, 
+      ema_28, ema_29, ema_30, ema_35, 
+      ema_40, ema_45, ema_50, ema_55, 
+      ema_60)
+    values (#{tsCode,jdbcType=VARCHAR}, #{tradeDate,jdbcType=VARCHAR}, #{ema3,jdbcType=DOUBLE}, 
+      #{ema4,jdbcType=DOUBLE}, #{ema5,jdbcType=DOUBLE}, #{ema6,jdbcType=DOUBLE}, #{ema7,jdbcType=DOUBLE}, 
+      #{ema8,jdbcType=DOUBLE}, #{ema9,jdbcType=DOUBLE}, #{ema10,jdbcType=DOUBLE}, #{ema11,jdbcType=DOUBLE}, 
+      #{ema12,jdbcType=DOUBLE}, #{ema13,jdbcType=DOUBLE}, #{ema14,jdbcType=DOUBLE}, #{ema15,jdbcType=DOUBLE}, 
+      #{ema16,jdbcType=DOUBLE}, #{ema17,jdbcType=DOUBLE}, #{ema18,jdbcType=DOUBLE}, #{ema19,jdbcType=DOUBLE}, 
+      #{ema20,jdbcType=DOUBLE}, #{ema21,jdbcType=DOUBLE}, #{ema22,jdbcType=DOUBLE}, #{ema23,jdbcType=DOUBLE}, 
+      #{ema24,jdbcType=DOUBLE}, #{ema25,jdbcType=DOUBLE}, #{ema26,jdbcType=DOUBLE}, #{ema27,jdbcType=DOUBLE}, 
+      #{ema28,jdbcType=DOUBLE}, #{ema29,jdbcType=DOUBLE}, #{ema30,jdbcType=DOUBLE}, #{ema35,jdbcType=DOUBLE}, 
+      #{ema40,jdbcType=DOUBLE}, #{ema45,jdbcType=DOUBLE}, #{ema50,jdbcType=DOUBLE}, #{ema55,jdbcType=DOUBLE}, 
+      #{ema60,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.EmaValue">
+    insert into ema_value
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="tradeDate != null">
+        trade_date,
+      </if>
+      <if test="ema3 != null">
+        ema_3,
+      </if>
+      <if test="ema4 != null">
+        ema_4,
+      </if>
+      <if test="ema5 != null">
+        ema_5,
+      </if>
+      <if test="ema6 != null">
+        ema_6,
+      </if>
+      <if test="ema7 != null">
+        ema_7,
+      </if>
+      <if test="ema8 != null">
+        ema_8,
+      </if>
+      <if test="ema9 != null">
+        ema_9,
+      </if>
+      <if test="ema10 != null">
+        ema_10,
+      </if>
+      <if test="ema11 != null">
+        ema_11,
+      </if>
+      <if test="ema12 != null">
+        ema_12,
+      </if>
+      <if test="ema13 != null">
+        ema_13,
+      </if>
+      <if test="ema14 != null">
+        ema_14,
+      </if>
+      <if test="ema15 != null">
+        ema_15,
+      </if>
+      <if test="ema16 != null">
+        ema_16,
+      </if>
+      <if test="ema17 != null">
+        ema_17,
+      </if>
+      <if test="ema18 != null">
+        ema_18,
+      </if>
+      <if test="ema19 != null">
+        ema_19,
+      </if>
+      <if test="ema20 != null">
+        ema_20,
+      </if>
+      <if test="ema21 != null">
+        ema_21,
+      </if>
+      <if test="ema22 != null">
+        ema_22,
+      </if>
+      <if test="ema23 != null">
+        ema_23,
+      </if>
+      <if test="ema24 != null">
+        ema_24,
+      </if>
+      <if test="ema25 != null">
+        ema_25,
+      </if>
+      <if test="ema26 != null">
+        ema_26,
+      </if>
+      <if test="ema27 != null">
+        ema_27,
+      </if>
+      <if test="ema28 != null">
+        ema_28,
+      </if>
+      <if test="ema29 != null">
+        ema_29,
+      </if>
+      <if test="ema30 != null">
+        ema_30,
+      </if>
+      <if test="ema35 != null">
+        ema_35,
+      </if>
+      <if test="ema40 != null">
+        ema_40,
+      </if>
+      <if test="ema45 != null">
+        ema_45,
+      </if>
+      <if test="ema50 != null">
+        ema_50,
+      </if>
+      <if test="ema55 != null">
+        ema_55,
+      </if>
+      <if test="ema60 != null">
+        ema_60,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeDate != null">
+        #{tradeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ema3 != null">
+        #{ema3,jdbcType=DOUBLE},
+      </if>
+      <if test="ema4 != null">
+        #{ema4,jdbcType=DOUBLE},
+      </if>
+      <if test="ema5 != null">
+        #{ema5,jdbcType=DOUBLE},
+      </if>
+      <if test="ema6 != null">
+        #{ema6,jdbcType=DOUBLE},
+      </if>
+      <if test="ema7 != null">
+        #{ema7,jdbcType=DOUBLE},
+      </if>
+      <if test="ema8 != null">
+        #{ema8,jdbcType=DOUBLE},
+      </if>
+      <if test="ema9 != null">
+        #{ema9,jdbcType=DOUBLE},
+      </if>
+      <if test="ema10 != null">
+        #{ema10,jdbcType=DOUBLE},
+      </if>
+      <if test="ema11 != null">
+        #{ema11,jdbcType=DOUBLE},
+      </if>
+      <if test="ema12 != null">
+        #{ema12,jdbcType=DOUBLE},
+      </if>
+      <if test="ema13 != null">
+        #{ema13,jdbcType=DOUBLE},
+      </if>
+      <if test="ema14 != null">
+        #{ema14,jdbcType=DOUBLE},
+      </if>
+      <if test="ema15 != null">
+        #{ema15,jdbcType=DOUBLE},
+      </if>
+      <if test="ema16 != null">
+        #{ema16,jdbcType=DOUBLE},
+      </if>
+      <if test="ema17 != null">
+        #{ema17,jdbcType=DOUBLE},
+      </if>
+      <if test="ema18 != null">
+        #{ema18,jdbcType=DOUBLE},
+      </if>
+      <if test="ema19 != null">
+        #{ema19,jdbcType=DOUBLE},
+      </if>
+      <if test="ema20 != null">
+        #{ema20,jdbcType=DOUBLE},
+      </if>
+      <if test="ema21 != null">
+        #{ema21,jdbcType=DOUBLE},
+      </if>
+      <if test="ema22 != null">
+        #{ema22,jdbcType=DOUBLE},
+      </if>
+      <if test="ema23 != null">
+        #{ema23,jdbcType=DOUBLE},
+      </if>
+      <if test="ema24 != null">
+        #{ema24,jdbcType=DOUBLE},
+      </if>
+      <if test="ema25 != null">
+        #{ema25,jdbcType=DOUBLE},
+      </if>
+      <if test="ema26 != null">
+        #{ema26,jdbcType=DOUBLE},
+      </if>
+      <if test="ema27 != null">
+        #{ema27,jdbcType=DOUBLE},
+      </if>
+      <if test="ema28 != null">
+        #{ema28,jdbcType=DOUBLE},
+      </if>
+      <if test="ema29 != null">
+        #{ema29,jdbcType=DOUBLE},
+      </if>
+      <if test="ema30 != null">
+        #{ema30,jdbcType=DOUBLE},
+      </if>
+      <if test="ema35 != null">
+        #{ema35,jdbcType=DOUBLE},
+      </if>
+      <if test="ema40 != null">
+        #{ema40,jdbcType=DOUBLE},
+      </if>
+      <if test="ema45 != null">
+        #{ema45,jdbcType=DOUBLE},
+      </if>
+      <if test="ema50 != null">
+        #{ema50,jdbcType=DOUBLE},
+      </if>
+      <if test="ema55 != null">
+        #{ema55,jdbcType=DOUBLE},
+      </if>
+      <if test="ema60 != null">
+        #{ema60,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cassiopeia.stock.beans.EmaValueExample" resultType="java.lang.Long">
+    select count(*) from ema_value
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ema_value
+    <set>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeDate != null">
+        trade_date = #{record.tradeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ema3 != null">
+        ema_3 = #{record.ema3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema4 != null">
+        ema_4 = #{record.ema4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema5 != null">
+        ema_5 = #{record.ema5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema6 != null">
+        ema_6 = #{record.ema6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema7 != null">
+        ema_7 = #{record.ema7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema8 != null">
+        ema_8 = #{record.ema8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema9 != null">
+        ema_9 = #{record.ema9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema10 != null">
+        ema_10 = #{record.ema10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema11 != null">
+        ema_11 = #{record.ema11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema12 != null">
+        ema_12 = #{record.ema12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema13 != null">
+        ema_13 = #{record.ema13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema14 != null">
+        ema_14 = #{record.ema14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema15 != null">
+        ema_15 = #{record.ema15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema16 != null">
+        ema_16 = #{record.ema16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema17 != null">
+        ema_17 = #{record.ema17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema18 != null">
+        ema_18 = #{record.ema18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema19 != null">
+        ema_19 = #{record.ema19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema20 != null">
+        ema_20 = #{record.ema20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema21 != null">
+        ema_21 = #{record.ema21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema22 != null">
+        ema_22 = #{record.ema22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema23 != null">
+        ema_23 = #{record.ema23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema24 != null">
+        ema_24 = #{record.ema24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema25 != null">
+        ema_25 = #{record.ema25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema26 != null">
+        ema_26 = #{record.ema26,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema27 != null">
+        ema_27 = #{record.ema27,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema28 != null">
+        ema_28 = #{record.ema28,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema29 != null">
+        ema_29 = #{record.ema29,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema30 != null">
+        ema_30 = #{record.ema30,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema35 != null">
+        ema_35 = #{record.ema35,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema40 != null">
+        ema_40 = #{record.ema40,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema45 != null">
+        ema_45 = #{record.ema45,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema50 != null">
+        ema_50 = #{record.ema50,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema55 != null">
+        ema_55 = #{record.ema55,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ema60 != null">
+        ema_60 = #{record.ema60,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ema_value
+    set ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      trade_date = #{record.tradeDate,jdbcType=VARCHAR},
+      ema_3 = #{record.ema3,jdbcType=DOUBLE},
+      ema_4 = #{record.ema4,jdbcType=DOUBLE},
+      ema_5 = #{record.ema5,jdbcType=DOUBLE},
+      ema_6 = #{record.ema6,jdbcType=DOUBLE},
+      ema_7 = #{record.ema7,jdbcType=DOUBLE},
+      ema_8 = #{record.ema8,jdbcType=DOUBLE},
+      ema_9 = #{record.ema9,jdbcType=DOUBLE},
+      ema_10 = #{record.ema10,jdbcType=DOUBLE},
+      ema_11 = #{record.ema11,jdbcType=DOUBLE},
+      ema_12 = #{record.ema12,jdbcType=DOUBLE},
+      ema_13 = #{record.ema13,jdbcType=DOUBLE},
+      ema_14 = #{record.ema14,jdbcType=DOUBLE},
+      ema_15 = #{record.ema15,jdbcType=DOUBLE},
+      ema_16 = #{record.ema16,jdbcType=DOUBLE},
+      ema_17 = #{record.ema17,jdbcType=DOUBLE},
+      ema_18 = #{record.ema18,jdbcType=DOUBLE},
+      ema_19 = #{record.ema19,jdbcType=DOUBLE},
+      ema_20 = #{record.ema20,jdbcType=DOUBLE},
+      ema_21 = #{record.ema21,jdbcType=DOUBLE},
+      ema_22 = #{record.ema22,jdbcType=DOUBLE},
+      ema_23 = #{record.ema23,jdbcType=DOUBLE},
+      ema_24 = #{record.ema24,jdbcType=DOUBLE},
+      ema_25 = #{record.ema25,jdbcType=DOUBLE},
+      ema_26 = #{record.ema26,jdbcType=DOUBLE},
+      ema_27 = #{record.ema27,jdbcType=DOUBLE},
+      ema_28 = #{record.ema28,jdbcType=DOUBLE},
+      ema_29 = #{record.ema29,jdbcType=DOUBLE},
+      ema_30 = #{record.ema30,jdbcType=DOUBLE},
+      ema_35 = #{record.ema35,jdbcType=DOUBLE},
+      ema_40 = #{record.ema40,jdbcType=DOUBLE},
+      ema_45 = #{record.ema45,jdbcType=DOUBLE},
+      ema_50 = #{record.ema50,jdbcType=DOUBLE},
+      ema_55 = #{record.ema55,jdbcType=DOUBLE},
+      ema_60 = #{record.ema60,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.EmaValue">
+    update ema_value
+    <set>
+      <if test="ema3 != null">
+        ema_3 = #{ema3,jdbcType=DOUBLE},
+      </if>
+      <if test="ema4 != null">
+        ema_4 = #{ema4,jdbcType=DOUBLE},
+      </if>
+      <if test="ema5 != null">
+        ema_5 = #{ema5,jdbcType=DOUBLE},
+      </if>
+      <if test="ema6 != null">
+        ema_6 = #{ema6,jdbcType=DOUBLE},
+      </if>
+      <if test="ema7 != null">
+        ema_7 = #{ema7,jdbcType=DOUBLE},
+      </if>
+      <if test="ema8 != null">
+        ema_8 = #{ema8,jdbcType=DOUBLE},
+      </if>
+      <if test="ema9 != null">
+        ema_9 = #{ema9,jdbcType=DOUBLE},
+      </if>
+      <if test="ema10 != null">
+        ema_10 = #{ema10,jdbcType=DOUBLE},
+      </if>
+      <if test="ema11 != null">
+        ema_11 = #{ema11,jdbcType=DOUBLE},
+      </if>
+      <if test="ema12 != null">
+        ema_12 = #{ema12,jdbcType=DOUBLE},
+      </if>
+      <if test="ema13 != null">
+        ema_13 = #{ema13,jdbcType=DOUBLE},
+      </if>
+      <if test="ema14 != null">
+        ema_14 = #{ema14,jdbcType=DOUBLE},
+      </if>
+      <if test="ema15 != null">
+        ema_15 = #{ema15,jdbcType=DOUBLE},
+      </if>
+      <if test="ema16 != null">
+        ema_16 = #{ema16,jdbcType=DOUBLE},
+      </if>
+      <if test="ema17 != null">
+        ema_17 = #{ema17,jdbcType=DOUBLE},
+      </if>
+      <if test="ema18 != null">
+        ema_18 = #{ema18,jdbcType=DOUBLE},
+      </if>
+      <if test="ema19 != null">
+        ema_19 = #{ema19,jdbcType=DOUBLE},
+      </if>
+      <if test="ema20 != null">
+        ema_20 = #{ema20,jdbcType=DOUBLE},
+      </if>
+      <if test="ema21 != null">
+        ema_21 = #{ema21,jdbcType=DOUBLE},
+      </if>
+      <if test="ema22 != null">
+        ema_22 = #{ema22,jdbcType=DOUBLE},
+      </if>
+      <if test="ema23 != null">
+        ema_23 = #{ema23,jdbcType=DOUBLE},
+      </if>
+      <if test="ema24 != null">
+        ema_24 = #{ema24,jdbcType=DOUBLE},
+      </if>
+      <if test="ema25 != null">
+        ema_25 = #{ema25,jdbcType=DOUBLE},
+      </if>
+      <if test="ema26 != null">
+        ema_26 = #{ema26,jdbcType=DOUBLE},
+      </if>
+      <if test="ema27 != null">
+        ema_27 = #{ema27,jdbcType=DOUBLE},
+      </if>
+      <if test="ema28 != null">
+        ema_28 = #{ema28,jdbcType=DOUBLE},
+      </if>
+      <if test="ema29 != null">
+        ema_29 = #{ema29,jdbcType=DOUBLE},
+      </if>
+      <if test="ema30 != null">
+        ema_30 = #{ema30,jdbcType=DOUBLE},
+      </if>
+      <if test="ema35 != null">
+        ema_35 = #{ema35,jdbcType=DOUBLE},
+      </if>
+      <if test="ema40 != null">
+        ema_40 = #{ema40,jdbcType=DOUBLE},
+      </if>
+      <if test="ema45 != null">
+        ema_45 = #{ema45,jdbcType=DOUBLE},
+      </if>
+      <if test="ema50 != null">
+        ema_50 = #{ema50,jdbcType=DOUBLE},
+      </if>
+      <if test="ema55 != null">
+        ema_55 = #{ema55,jdbcType=DOUBLE},
+      </if>
+      <if test="ema60 != null">
+        ema_60 = #{ema60,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+      and trade_date = #{tradeDate,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.EmaValue">
+    update ema_value
+    set ema_3 = #{ema3,jdbcType=DOUBLE},
+      ema_4 = #{ema4,jdbcType=DOUBLE},
+      ema_5 = #{ema5,jdbcType=DOUBLE},
+      ema_6 = #{ema6,jdbcType=DOUBLE},
+      ema_7 = #{ema7,jdbcType=DOUBLE},
+      ema_8 = #{ema8,jdbcType=DOUBLE},
+      ema_9 = #{ema9,jdbcType=DOUBLE},
+      ema_10 = #{ema10,jdbcType=DOUBLE},
+      ema_11 = #{ema11,jdbcType=DOUBLE},
+      ema_12 = #{ema12,jdbcType=DOUBLE},
+      ema_13 = #{ema13,jdbcType=DOUBLE},
+      ema_14 = #{ema14,jdbcType=DOUBLE},
+      ema_15 = #{ema15,jdbcType=DOUBLE},
+      ema_16 = #{ema16,jdbcType=DOUBLE},
+      ema_17 = #{ema17,jdbcType=DOUBLE},
+      ema_18 = #{ema18,jdbcType=DOUBLE},
+      ema_19 = #{ema19,jdbcType=DOUBLE},
+      ema_20 = #{ema20,jdbcType=DOUBLE},
+      ema_21 = #{ema21,jdbcType=DOUBLE},
+      ema_22 = #{ema22,jdbcType=DOUBLE},
+      ema_23 = #{ema23,jdbcType=DOUBLE},
+      ema_24 = #{ema24,jdbcType=DOUBLE},
+      ema_25 = #{ema25,jdbcType=DOUBLE},
+      ema_26 = #{ema26,jdbcType=DOUBLE},
+      ema_27 = #{ema27,jdbcType=DOUBLE},
+      ema_28 = #{ema28,jdbcType=DOUBLE},
+      ema_29 = #{ema29,jdbcType=DOUBLE},
+      ema_30 = #{ema30,jdbcType=DOUBLE},
+      ema_35 = #{ema35,jdbcType=DOUBLE},
+      ema_40 = #{ema40,jdbcType=DOUBLE},
+      ema_45 = #{ema45,jdbcType=DOUBLE},
+      ema_50 = #{ema50,jdbcType=DOUBLE},
+      ema_55 = #{ema55,jdbcType=DOUBLE},
+      ema_60 = #{ema60,jdbcType=DOUBLE}
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+      and trade_date = #{tradeDate,jdbcType=VARCHAR}
+  </update>
+</mapper>
