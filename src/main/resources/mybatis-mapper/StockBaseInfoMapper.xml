@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    trade_date, ts_code, open, close, high, low, vol, amount, pre_close, change, pct_chg
+    trade_date, ts_code, `open`, `close`, high, low, vol, amount, pre_close, `change`, pct_chg
   </sql>
   <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.StockBaseInfoExample" resultMap="BaseResultMap">
     select
