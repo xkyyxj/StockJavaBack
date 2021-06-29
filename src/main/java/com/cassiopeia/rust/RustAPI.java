@@ -14,5 +14,7 @@ public class RustAPI {
 
     public static native void trackSold();
 
+    public static native void maxWinCalculate();
+
 
 }

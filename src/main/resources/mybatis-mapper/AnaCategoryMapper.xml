@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cassiopeia.stock.mapper.AnaCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.AnaCategory">
+<mapper namespace="com.serpent.stock.mapper.AnaCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.AnaCategory">
     <id column="pk_category" jdbcType="INTEGER" property="pkCategory" />
     <result column="pk_tablemeta" jdbcType="INTEGER" property="pkTablemeta" />
     <result column="pk_parent" jdbcType="INTEGER" property="pkParent" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     pk_category, pk_tablemeta, pk_parent, category_name
   </sql>
-  <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.AnaCategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.AnaCategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,19 +92,19 @@
     delete from ana_category
     where pk_category = #{pkCategory,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.AnaCategoryExample">
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.AnaCategoryExample">
     delete from ana_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cassiopeia.stock.beans.AnaCategory">
+  <insert id="insert" parameterType="com.serpent.stock.beans.AnaCategory">
     insert into ana_category (pk_category, pk_tablemeta, pk_parent, 
       category_name)
     values (#{pkCategory,jdbcType=INTEGER}, #{pkTablemeta,jdbcType=INTEGER}, #{pkParent,jdbcType=INTEGER}, 
       #{categoryName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.AnaCategory">
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.AnaCategory">
     insert into ana_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pkCategory != null">
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cassiopeia.stock.beans.AnaCategoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.serpent.stock.beans.AnaCategoryExample" resultType="java.lang.Long">
     select count(*) from ana_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.AnaCategory">
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.AnaCategory">
     update ana_category
     <set>
       <if test="pkTablemeta != null">
@@ -186,7 +186,7 @@
     </set>
     where pk_category = #{pkCategory,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AnaCategory">
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.AnaCategory">
     update ana_category
     set pk_tablemeta = #{pkTablemeta,jdbcType=INTEGER},
       pk_parent = #{pkParent,jdbcType=INTEGER},

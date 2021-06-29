@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cassiopeia.stock.mapper.StockBaseInfoMapper">
-  <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.StockBaseInfo">
+<mapper namespace="com.serpent.stock.mapper.StockBaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.StockBaseInfo">
     <id column="trade_date" jdbcType="VARCHAR" property="tradeDate" />
     <id column="ts_code" jdbcType="VARCHAR" property="tsCode" />
     <result column="open" jdbcType="DOUBLE" property="open" />
@@ -75,7 +75,7 @@
   <sql id="Base_Column_List">
     trade_date, ts_code, `open`, `close`, high, low, vol, amount, pre_close, `change`, pct_chg
   </sql>
-  <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.StockBaseInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.StockBaseInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -89,25 +89,25 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.cassiopeia.stock.beans.StockBaseInfoKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.serpent.stock.beans.StockBaseInfoKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from stock_base_info
     where trade_date = #{tradeDate,jdbcType=VARCHAR}
       and ts_code = #{tsCode,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.cassiopeia.stock.beans.StockBaseInfoKey">
+  <delete id="deleteByPrimaryKey" parameterType="com.serpent.stock.beans.StockBaseInfoKey">
     delete from stock_base_info
     where trade_date = #{tradeDate,jdbcType=VARCHAR}
       and ts_code = #{tsCode,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.StockBaseInfoExample">
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.StockBaseInfoExample">
     delete from stock_base_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cassiopeia.stock.beans.StockBaseInfo">
+  <insert id="insert" parameterType="com.serpent.stock.beans.StockBaseInfo">
     insert into stock_base_info (trade_date, ts_code, open, 
       close, high, low, vol, 
       amount, pre_close, change, 
@@ -117,7 +117,7 @@
       #{amount,jdbcType=DOUBLE}, #{preClose,jdbcType=DOUBLE}, #{change,jdbcType=DOUBLE}, 
       #{pctChg,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.StockBaseInfo">
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.StockBaseInfo">
     insert into stock_base_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tradeDate != null">
@@ -190,7 +190,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cassiopeia.stock.beans.StockBaseInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.serpent.stock.beans.StockBaseInfoExample" resultType="java.lang.Long">
     select count(*) from stock_base_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -254,7 +254,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.StockBaseInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.StockBaseInfo">
     update stock_base_info
     <set>
       <if test="open != null">
@@ -288,7 +288,7 @@
     where trade_date = #{tradeDate,jdbcType=VARCHAR}
       and ts_code = #{tsCode,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.StockBaseInfo">
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.StockBaseInfo">
     update stock_base_info
     set open = #{open,jdbcType=DOUBLE},
       close = #{close,jdbcType=DOUBLE},

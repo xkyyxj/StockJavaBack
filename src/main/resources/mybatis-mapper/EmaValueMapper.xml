@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cassiopeia.stock.mapper.EmaValueMapper">
-  <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.EmaValue">
+<mapper namespace="com.serpent.stock.mapper.EmaValueMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.EmaValue">
     <id column="ts_code" jdbcType="VARCHAR" property="tsCode" />
     <id column="trade_date" jdbcType="VARCHAR" property="tradeDate" />
     <result column="ema_3" jdbcType="DOUBLE" property="ema3" />
@@ -103,7 +103,7 @@
     ema_23, ema_24, ema_25, ema_26, ema_27, ema_28, ema_29, ema_30, ema_35, ema_40, ema_45, 
     ema_50, ema_55, ema_60
   </sql>
-  <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.EmaValueExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.EmaValueExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -117,25 +117,25 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.cassiopeia.stock.beans.EmaValueKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.serpent.stock.beans.EmaValueKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from ema_value
     where ts_code = #{tsCode,jdbcType=VARCHAR}
       and trade_date = #{tradeDate,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.cassiopeia.stock.beans.EmaValueKey">
+  <delete id="deleteByPrimaryKey" parameterType="com.serpent.stock.beans.EmaValueKey">
     delete from ema_value
     where ts_code = #{tsCode,jdbcType=VARCHAR}
       and trade_date = #{tradeDate,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.EmaValueExample">
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.EmaValueExample">
     delete from ema_value
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cassiopeia.stock.beans.EmaValue">
+  <insert id="insert" parameterType="com.serpent.stock.beans.EmaValue">
     insert into ema_value (ts_code, trade_date, ema_3, 
       ema_4, ema_5, ema_6, ema_7, 
       ema_8, ema_9, ema_10, ema_11, 
@@ -157,7 +157,7 @@
       #{ema40,jdbcType=DOUBLE}, #{ema45,jdbcType=DOUBLE}, #{ema50,jdbcType=DOUBLE}, #{ema55,jdbcType=DOUBLE}, 
       #{ema60,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.EmaValue">
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.EmaValue">
     insert into ema_value
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tsCode != null">
@@ -380,7 +380,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cassiopeia.stock.beans.EmaValueExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.serpent.stock.beans.EmaValueExample" resultType="java.lang.Long">
     select count(*) from ema_value
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -544,7 +544,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.EmaValue">
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.EmaValue">
     update ema_value
     <set>
       <if test="ema3 != null">
@@ -653,7 +653,7 @@
     where ts_code = #{tsCode,jdbcType=VARCHAR}
       and trade_date = #{tradeDate,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.EmaValue">
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.EmaValue">
     update ema_value
     set ema_3 = #{ema3,jdbcType=DOUBLE},
       ema_4 = #{ema4,jdbcType=DOUBLE},

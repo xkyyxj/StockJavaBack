@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cassiopeia.stock.mapper.AdjFactorMapper">
-    <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.AdjFactor">
+<mapper namespace="com.serpent.stock.mapper.AdjFactorMapper">
+    <resultMap id="BaseResultMap" type="com.serpent.stock.beans.AdjFactor">
         <id column="ts_code" jdbcType="VARCHAR" property="tsCode"/>
         <id column="trade_date" jdbcType="VARCHAR" property="tradeDate"/>
         <result column="adj_factor" jdbcType="DOUBLE" property="adjFactor"/>
@@ -70,7 +70,7 @@
         ts_code
         , trade_date, adj_factor
     </sql>
-    <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.AdjFactorExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.serpent.stock.beans.AdjFactorExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -84,30 +84,30 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AdjFactorKey" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="com.serpent.stock.beans.AdjFactorKey" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from adj_factor
         where ts_code = #{tsCode,jdbcType=VARCHAR}
         and trade_date = #{tradeDate,jdbcType=VARCHAR}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AdjFactorKey">
+    <delete id="deleteByPrimaryKey" parameterType="com.serpent.stock.beans.AdjFactorKey">
         delete
         from adj_factor
         where ts_code = #{tsCode,jdbcType=VARCHAR}
           and trade_date = #{tradeDate,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.AdjFactorExample">
+    <delete id="deleteByExample" parameterType="com.serpent.stock.beans.AdjFactorExample">
         delete from adj_factor
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+    <insert id="insert" parameterType="com.serpent.stock.beans.AdjFactor">
         insert into adj_factor (ts_code, trade_date, adj_factor)
         values (#{tsCode,jdbcType=VARCHAR}, #{tradeDate,jdbcType=VARCHAR}, #{adjFactor,jdbcType=DOUBLE})
     </insert>
-    <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+    <insert id="insertSelective" parameterType="com.serpent.stock.beans.AdjFactor">
         insert into adj_factor
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="tsCode != null">
@@ -132,7 +132,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.cassiopeia.stock.beans.AdjFactorExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.serpent.stock.beans.AdjFactorExample" resultType="java.lang.Long">
         select count(*) from adj_factor
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -164,7 +164,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+    <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.AdjFactor">
         update adj_factor
         <set>
             <if test="adjFactor != null">
@@ -174,7 +174,7 @@
         where ts_code = #{tsCode,jdbcType=VARCHAR}
         and trade_date = #{tradeDate,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.AdjFactor">
+    <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.AdjFactor">
         update adj_factor
         set adj_factor = #{adjFactor,jdbcType=DOUBLE}
         where ts_code = #{tsCode,jdbcType=VARCHAR}

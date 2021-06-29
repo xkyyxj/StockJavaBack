@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cassiopeia.stock.mapper.HistoryDownMapper">
-  <resultMap id="BaseResultMap" type="com.cassiopeia.stock.beans.HistoryDown">
+<mapper namespace="com.serpent.stock.mapper.HistoryDownMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.HistoryDown">
     <id column="pk_history_down" jdbcType="INTEGER" property="pkHistoryDown" />
     <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
     <result column="in_date" jdbcType="VARCHAR" property="inDate" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     pk_history_down, ts_code, in_date, in_price, history_len, delta_pct, his_down_price
   </sql>
-  <select id="selectByExample" parameterType="com.cassiopeia.stock.beans.HistoryDownExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.HistoryDownExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
     delete from history_down
     where pk_history_down = #{pkHistoryDown,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cassiopeia.stock.beans.HistoryDownExample">
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.HistoryDownExample">
     delete from history_down
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+  <insert id="insert" parameterType="com.serpent.stock.beans.HistoryDown">
     insert into history_down (pk_history_down, ts_code, in_date, 
       in_price, history_len, delta_pct, 
       his_down_price)
@@ -109,7 +109,7 @@
       #{inPrice,jdbcType=DOUBLE}, #{historyLen,jdbcType=INTEGER}, #{deltaPct,jdbcType=DOUBLE}, 
       #{hisDownPrice,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.HistoryDown">
     insert into history_down
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pkHistoryDown != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cassiopeia.stock.beans.HistoryDownExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.serpent.stock.beans.HistoryDownExample" resultType="java.lang.Long">
     select count(*) from history_down
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.HistoryDown">
     update history_down
     <set>
       <if test="tsCode != null">
@@ -230,7 +230,7 @@
     </set>
     where pk_history_down = #{pkHistoryDown,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cassiopeia.stock.beans.HistoryDown">
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.HistoryDown">
     update history_down
     set ts_code = #{tsCode,jdbcType=VARCHAR},
       in_date = #{inDate,jdbcType=VARCHAR},
