@@ -1,7 +1,6 @@
 package com.serpent.stock.controller;
 
 import com.serpent.config.Constant;
-import com.cassiopeia.stock.beans.*;
 import com.serpent.stock.beans.*;
 import com.serpent.stock.calculator.EMACalculator;
 import com.serpent.stock.dto.TushareData;

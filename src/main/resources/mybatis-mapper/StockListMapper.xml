@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serpent.stock.mapper.StockListMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.StockList">
+    <id column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="fullname" jdbcType="VARCHAR" property="fullname" />
+    <result column="enname" jdbcType="VARCHAR" property="enname" />
+    <result column="market" jdbcType="VARCHAR" property="market" />
+    <result column="list_status" jdbcType="VARCHAR" property="listStatus" />
+    <result column="list_date" jdbcType="VARCHAR" property="listDate" />
+    <result column="delist_date" jdbcType="VARCHAR" property="delistDate" />
+    <result column="is_hs" jdbcType="VARCHAR" property="isHs" />
+    <result column="exchange" jdbcType="VARCHAR" property="exchange" />
+    <result column="curr_type" jdbcType="VARCHAR" property="currType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ts_code, symbol, name, area, industry, fullname, enname, market, list_status, list_date, 
+    delist_date, is_hs, exchange, curr_type
+  </sql>
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.StockListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stock_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_list
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stock_list
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.StockListExample">
+    delete from stock_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.serpent.stock.beans.StockList">
+    insert into stock_list (ts_code, symbol, name, 
+      area, industry, fullname, 
+      enname, market, list_status, 
+      list_date, delist_date, is_hs, 
+      exchange, curr_type)
+    values (#{tsCode,jdbcType=VARCHAR}, #{symbol,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, 
+      #{enname,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{listStatus,jdbcType=VARCHAR}, 
+      #{listDate,jdbcType=VARCHAR}, #{delistDate,jdbcType=VARCHAR}, #{isHs,jdbcType=VARCHAR}, 
+      #{exchange,jdbcType=VARCHAR}, #{currType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.StockList">
+    insert into stock_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="fullname != null">
+        fullname,
+      </if>
+      <if test="enname != null">
+        enname,
+      </if>
+      <if test="market != null">
+        market,
+      </if>
+      <if test="listStatus != null">
+        list_status,
+      </if>
+      <if test="listDate != null">
+        list_date,
+      </if>
+      <if test="delistDate != null">
+        delist_date,
+      </if>
+      <if test="isHs != null">
+        is_hs,
+      </if>
+      <if test="exchange != null">
+        exchange,
+      </if>
+      <if test="currType != null">
+        curr_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null">
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null">
+        #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="listStatus != null">
+        #{listStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="listDate != null">
+        #{listDate,jdbcType=VARCHAR},
+      </if>
+      <if test="delistDate != null">
+        #{delistDate,jdbcType=VARCHAR},
+      </if>
+      <if test="isHs != null">
+        #{isHs,jdbcType=VARCHAR},
+      </if>
+      <if test="exchange != null">
+        #{exchange,jdbcType=VARCHAR},
+      </if>
+      <if test="currType != null">
+        #{currType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.serpent.stock.beans.StockListExample" resultType="java.lang.Long">
+    select count(*) from stock_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stock_list
+    <set>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.symbol != null">
+        symbol = #{record.symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null">
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullname != null">
+        fullname = #{record.fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enname != null">
+        enname = #{record.enname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null">
+        market = #{record.market,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listStatus != null">
+        list_status = #{record.listStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.listDate != null">
+        list_date = #{record.listDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delistDate != null">
+        delist_date = #{record.delistDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHs != null">
+        is_hs = #{record.isHs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchange != null">
+        exchange = #{record.exchange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currType != null">
+        curr_type = #{record.currType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stock_list
+    set ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      symbol = #{record.symbol,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      fullname = #{record.fullname,jdbcType=VARCHAR},
+      enname = #{record.enname,jdbcType=VARCHAR},
+      market = #{record.market,jdbcType=VARCHAR},
+      list_status = #{record.listStatus,jdbcType=VARCHAR},
+      list_date = #{record.listDate,jdbcType=VARCHAR},
+      delist_date = #{record.delistDate,jdbcType=VARCHAR},
+      is_hs = #{record.isHs,jdbcType=VARCHAR},
+      exchange = #{record.exchange,jdbcType=VARCHAR},
+      curr_type = #{record.currType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.StockList">
+    update stock_list
+    <set>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null">
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null">
+        enname = #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null">
+        market = #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="listStatus != null">
+        list_status = #{listStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="listDate != null">
+        list_date = #{listDate,jdbcType=VARCHAR},
+      </if>
+      <if test="delistDate != null">
+        delist_date = #{delistDate,jdbcType=VARCHAR},
+      </if>
+      <if test="isHs != null">
+        is_hs = #{isHs,jdbcType=VARCHAR},
+      </if>
+      <if test="exchange != null">
+        exchange = #{exchange,jdbcType=VARCHAR},
+      </if>
+      <if test="currType != null">
+        curr_type = #{currType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.StockList">
+    update stock_list
+    set symbol = #{symbol,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      enname = #{enname,jdbcType=VARCHAR},
+      market = #{market,jdbcType=VARCHAR},
+      list_status = #{listStatus,jdbcType=VARCHAR},
+      list_date = #{listDate,jdbcType=VARCHAR},
+      delist_date = #{delistDate,jdbcType=VARCHAR},
+      is_hs = #{isHs,jdbcType=VARCHAR},
+      exchange = #{exchange,jdbcType=VARCHAR},
+      curr_type = #{currType,jdbcType=VARCHAR}
+    where ts_code = #{tsCode,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 自定义查询 -->
+  <select id="selectAllTsCodes" resultType="java.util.List">
+    select ts_code from stock_list
+  </select>
+</mapper>

@@ -327,4 +327,9 @@
       )
     </foreach>
   </insert>
+
+  <!-- 自定义查询 -->
+  <select id="queryLastFewDayInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from stock_base_info where ts_code=#{param.ts_code} order by trade_date desc limit ${param.num}
+  </select>
 </mapper>
