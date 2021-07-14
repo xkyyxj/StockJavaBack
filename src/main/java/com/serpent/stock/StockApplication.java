@@ -6,12 +6,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.HashMap;
 
-@SpringBootApplication(scanBasePackages = {"com.cassiopeia.config", "com.cassiopeia.stock.controller",
-        "com.cassiopeia.stock.dao", "com.cassiopeia.stock.service"})
-@MapperScan(basePackages = {"com.cassiopeia.stock.mapper"})
+@SpringBootApplication(scanBasePackages = {"com.serpent.config", "com.serpent.stock.controller",
+        "com.serpent.stock.dao", "com.serpent.stock.service", "com.serpent.stock.calculator"})
+@MapperScan(basePackages = {"com.serpent.stock.mapper"})
 public class StockApplication {
 
     static {
@@ -20,6 +21,7 @@ public class StockApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(StockApplication.class, args);
+        StringRedisTemplate stringRedisTemplate = context.getBean(StringRedisTemplate.class);        //往redis中存入数据
         BeanUtils.setContext(context);
 
         // 初始化Rust并开始获取实时信息，并计算相应的股票

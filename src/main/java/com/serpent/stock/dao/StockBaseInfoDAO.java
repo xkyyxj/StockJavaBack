@@ -1,7 +1,6 @@
 package com.serpent.stock.dao;
 
 import com.serpent.stock.beans.StockBaseInfo;
-import com.serpent.stock.beans.StockBaseInfoExample;
 import com.serpent.stock.mapper.StockBaseInfoMapper;
 import com.serpent.stock.mapper.StockListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,7 @@ public class StockBaseInfoDAO {
         param.put("ts_code", ts_code);
         param.put("num", days);
         List<StockBaseInfo> retBaseInfos = baseInfoMapper.queryLastFewDayInfo(param);
+        return null;
     }
 
     public List<String> getAllStockListCode() {
