@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!-- 指定数据库驱动的地址 这是我mac下的绝对路径-->
-    <classPathEntry location="C:\Users\Cassiopeia\.m2\repository\mysql\mysql-connector-java\8.0.19\mysql-connector-java-8.0.19.jar" />
+    <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.19\mysql-connector-java-8.0.19.jar" />
     <!--一个数据库 对应一个context-->
     <!--
     context:生成一组对象的环境
@@ -62,7 +62,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table schema="" tableName="recent_max_win">
+        <table schema="" tableName="very_short_simulate">
             <property name="modelOnly" value="false"/>
         </table>
     </context>

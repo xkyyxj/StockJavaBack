@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutionException;
+
 @RestController
 @RequestMapping("/calculate")
 public class CalculateController {
@@ -25,7 +27,7 @@ public class CalculateController {
     }
 
     @RequestMapping("/calculateRecentMaxWin/{calculatorType}")
-    public void calculateRecentMaxWin(@PathVariable("calculatorType") String type) {
+    public void calculateRecentMaxWin(@PathVariable("calculatorType") String type) throws ExecutionException, InterruptedException {
         // FIXME -- 如果前端传入参数错误，不能得到正确的calculator
         ICalculator realCalculator = (ICalculator) BeanUtils.getBeanByName(type);
         calculatorDispatcher.startCalculate(realCalculator);

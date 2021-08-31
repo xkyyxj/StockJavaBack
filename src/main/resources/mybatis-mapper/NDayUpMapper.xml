@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serpent.stock.mapper.NDayUpMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.NDayUp">
+    <id column="pk_two_up" jdbcType="INTEGER" property="pkTwoUp" />
+    <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="curr_close" jdbcType="VARCHAR" property="currClose" />
+    <result column="n_day_pct" jdbcType="VARCHAR" property="nDayPct" />
+    <result column="five_day_pct" jdbcType="VARCHAR" property="fiveDayPct" />
+    <result column="up_count" jdbcType="INTEGER" property="upCount" />
+    <result column="in_date" jdbcType="VARCHAR" property="inDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pk_two_up, ts_code, curr_close, n_day_pct, five_day_pct, up_count, in_date
+  </sql>
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.NDayUpExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from n_day_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from n_day_up
+    where pk_two_up = #{pkTwoUp,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from n_day_up
+    where pk_two_up = #{pkTwoUp,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.NDayUpExample">
+    delete from n_day_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.serpent.stock.beans.NDayUp">
+    insert into n_day_up (pk_two_up, ts_code, curr_close, 
+      n_day_pct, five_day_pct, up_count, 
+      in_date)
+    values (#{pkTwoUp,jdbcType=INTEGER}, #{tsCode,jdbcType=VARCHAR}, #{currClose,jdbcType=VARCHAR}, 
+      #{nDayPct,jdbcType=VARCHAR}, #{fiveDayPct,jdbcType=VARCHAR}, #{upCount,jdbcType=INTEGER}, 
+      #{inDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.NDayUp">
+    insert into n_day_up
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkTwoUp != null">
+        pk_two_up,
+      </if>
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="currClose != null">
+        curr_close,
+      </if>
+      <if test="nDayPct != null">
+        n_day_pct,
+      </if>
+      <if test="fiveDayPct != null">
+        five_day_pct,
+      </if>
+      <if test="upCount != null">
+        up_count,
+      </if>
+      <if test="inDate != null">
+        in_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkTwoUp != null">
+        #{pkTwoUp,jdbcType=INTEGER},
+      </if>
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="currClose != null">
+        #{currClose,jdbcType=VARCHAR},
+      </if>
+      <if test="nDayPct != null">
+        #{nDayPct,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveDayPct != null">
+        #{fiveDayPct,jdbcType=VARCHAR},
+      </if>
+      <if test="upCount != null">
+        #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        #{inDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.serpent.stock.beans.NDayUpExample" resultType="java.lang.Long">
+    select count(*) from n_day_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update n_day_up
+    <set>
+      <if test="record.pkTwoUp != null">
+        pk_two_up = #{record.pkTwoUp,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currClose != null">
+        curr_close = #{record.currClose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nDayPct != null">
+        n_day_pct = #{record.nDayPct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fiveDayPct != null">
+        five_day_pct = #{record.fiveDayPct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upCount != null">
+        up_count = #{record.upCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.inDate != null">
+        in_date = #{record.inDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update n_day_up
+    set pk_two_up = #{record.pkTwoUp,jdbcType=INTEGER},
+      ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      curr_close = #{record.currClose,jdbcType=VARCHAR},
+      n_day_pct = #{record.nDayPct,jdbcType=VARCHAR},
+      five_day_pct = #{record.fiveDayPct,jdbcType=VARCHAR},
+      up_count = #{record.upCount,jdbcType=INTEGER},
+      in_date = #{record.inDate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.NDayUp">
+    update n_day_up
+    <set>
+      <if test="tsCode != null">
+        ts_code = #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="currClose != null">
+        curr_close = #{currClose,jdbcType=VARCHAR},
+      </if>
+      <if test="nDayPct != null">
+        n_day_pct = #{nDayPct,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveDayPct != null">
+        five_day_pct = #{fiveDayPct,jdbcType=VARCHAR},
+      </if>
+      <if test="upCount != null">
+        up_count = #{upCount,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        in_date = #{inDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pk_two_up = #{pkTwoUp,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.NDayUp">
+    update n_day_up
+    set ts_code = #{tsCode,jdbcType=VARCHAR},
+      curr_close = #{currClose,jdbcType=VARCHAR},
+      n_day_pct = #{nDayPct,jdbcType=VARCHAR},
+      five_day_pct = #{fiveDayPct,jdbcType=VARCHAR},
+      up_count = #{upCount,jdbcType=INTEGER},
+      in_date = #{inDate,jdbcType=VARCHAR}
+    where pk_two_up = #{pkTwoUp,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryLatestDay" resultType="java.lang.String">
+    select in_date from n_day_up group by in_date order by in_date desc limit ${limitNum}
+  </select>
+</mapper>

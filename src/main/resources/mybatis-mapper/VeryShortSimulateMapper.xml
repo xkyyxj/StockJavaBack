@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serpent.stock.mapper.VeryShortSimulateMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.VeryShortSimulate">
+    <id column="pk_short" jdbcType="INTEGER" property="pkShort" />
+    <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="in_time" jdbcType="VARCHAR" property="inTime" />
+    <result column="in_price" jdbcType="DOUBLE" property="inPrice" />
+    <result column="out_price" jdbcType="DOUBLE" property="outPrice" />
+    <result column="out_time" jdbcType="VARCHAR" property="outTime" />
+    <result column="win_pct" jdbcType="DOUBLE" property="winPct" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pk_short, ts_code, in_time, in_price, out_price, out_time, win_pct
+  </sql>
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.VeryShortSimulateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from very_short_simulate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from very_short_simulate
+    where pk_short = #{pkShort,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from very_short_simulate
+    where pk_short = #{pkShort,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.VeryShortSimulateExample">
+    delete from very_short_simulate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.serpent.stock.beans.VeryShortSimulate">
+    insert into very_short_simulate (pk_short, ts_code, in_time, 
+      in_price, out_price, out_time, 
+      win_pct)
+    values (#{pkShort,jdbcType=INTEGER}, #{tsCode,jdbcType=VARCHAR}, #{inTime,jdbcType=VARCHAR}, 
+      #{inPrice,jdbcType=DOUBLE}, #{outPrice,jdbcType=DOUBLE}, #{outTime,jdbcType=VARCHAR}, 
+      #{winPct,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.VeryShortSimulate">
+    insert into very_short_simulate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkShort != null">
+        pk_short,
+      </if>
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="inTime != null">
+        in_time,
+      </if>
+      <if test="inPrice != null">
+        in_price,
+      </if>
+      <if test="outPrice != null">
+        out_price,
+      </if>
+      <if test="outTime != null">
+        out_time,
+      </if>
+      <if test="winPct != null">
+        win_pct,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkShort != null">
+        #{pkShort,jdbcType=INTEGER},
+      </if>
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null">
+        #{inTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        #{inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="outPrice != null">
+        #{outPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="outTime != null">
+        #{outTime,jdbcType=VARCHAR},
+      </if>
+      <if test="winPct != null">
+        #{winPct,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.serpent.stock.beans.VeryShortSimulateExample" resultType="java.lang.Long">
+    select count(*) from very_short_simulate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update very_short_simulate
+    <set>
+      <if test="record.pkShort != null">
+        pk_short = #{record.pkShort,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inTime != null">
+        in_time = #{record.inTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inPrice != null">
+        in_price = #{record.inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outPrice != null">
+        out_price = #{record.outPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outTime != null">
+        out_time = #{record.outTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.winPct != null">
+        win_pct = #{record.winPct,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update very_short_simulate
+    set pk_short = #{record.pkShort,jdbcType=INTEGER},
+      ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      in_time = #{record.inTime,jdbcType=VARCHAR},
+      in_price = #{record.inPrice,jdbcType=DOUBLE},
+      out_price = #{record.outPrice,jdbcType=DOUBLE},
+      out_time = #{record.outTime,jdbcType=VARCHAR},
+      win_pct = #{record.winPct,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.VeryShortSimulate">
+    update very_short_simulate
+    <set>
+      <if test="tsCode != null">
+        ts_code = #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null">
+        in_time = #{inTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        in_price = #{inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="outPrice != null">
+        out_price = #{outPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="outTime != null">
+        out_time = #{outTime,jdbcType=VARCHAR},
+      </if>
+      <if test="winPct != null">
+        win_pct = #{winPct,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where pk_short = #{pkShort,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.VeryShortSimulate">
+    update very_short_simulate
+    set ts_code = #{tsCode,jdbcType=VARCHAR},
+      in_time = #{inTime,jdbcType=VARCHAR},
+      in_price = #{inPrice,jdbcType=DOUBLE},
+      out_price = #{outPrice,jdbcType=DOUBLE},
+      out_time = #{outTime,jdbcType=VARCHAR},
+      win_pct = #{winPct,jdbcType=DOUBLE}
+    where pk_short = #{pkShort,jdbcType=INTEGER}
+  </update>
+  <select id="queryDayInfos">
+    select days from (select substr(in_time, 1, 8) days from very_short_simulate) t group by days order by days desc limit ${num}
+  </select>
+  <select id="queryTargetDayInfos" resultMap="BaseResultMap">
+    select * from very_short_simulate where in_time like #{date}
+  </select>
+  <select id="queryBeforeNoSoldInfos" resultMap="BaseResultMap">
+    select * from very_short_simulate where out_price is not null and in_time>#{inTime}
+  </select>
+</mapper>

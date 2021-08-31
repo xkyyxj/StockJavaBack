@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -25,10 +24,7 @@ public class StockBaseInfoDAO {
     }
 
     public List<StockBaseInfo> getLastInfoOfDays(String ts_code, int days) {
-        HashMap<String, Object> param = new HashMap<>();
-        param.put("ts_code", ts_code);
-        param.put("num", days);
-        List<StockBaseInfo> retBaseInfos = baseInfoMapper.queryLastFewDayInfo(param);
+        List<StockBaseInfo> retBaseInfos = baseInfoMapper.queryLastFewDayInfo(ts_code, days);
         return null;
     }
 

@@ -6,7 +6,6 @@ import com.serpent.stock.beans.StockBaseInfoKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface StockBaseInfoMapper {
     long countByExample(StockBaseInfoExample example);
@@ -36,5 +35,7 @@ public interface StockBaseInfoMapper {
     void batchInsert(List<StockBaseInfo> list);
 
     // FIXME -- 这里边这样传参数是不是太恶心了
-    List<StockBaseInfo> queryLastFewDayInfo(Map<String, Object> param);
+    List<StockBaseInfo> queryLastFewDayInfo(@Param("ts_code") String tsCode, @Param("num") int limitNum);
+
+    List<StockBaseInfo> queryLastDayInfos(List<String> items);
 }

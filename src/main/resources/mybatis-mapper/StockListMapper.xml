@@ -352,7 +352,7 @@
   </update>
 
   <!-- 自定义查询 -->
-  <select id="selectAllTsCodes" resultType="java.util.List">
+  <select id="selectAllTsCodes" resultType="java.lang.String">
     select ts_code from stock_list
   </select>
 </mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serpent.stock.mapper.FlowUpMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.FlowUp">
+    <id column="pk_up" jdbcType="INTEGER" property="pkUp" />
+    <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="flow_days" jdbcType="INTEGER" property="flowDays" />
+    <result column="in_date" jdbcType="VARCHAR" property="inDate" />
+    <result column="in_price" jdbcType="DOUBLE" property="inPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pk_up, ts_code, flow_days, in_date, in_price
+  </sql>
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.FlowUpExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flow_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flow_up
+    where pk_up = #{pkUp,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from flow_up
+    where pk_up = #{pkUp,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.FlowUpExample">
+    delete from flow_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.serpent.stock.beans.FlowUp">
+    insert into flow_up (pk_up, ts_code, flow_days, 
+      in_date, in_price)
+    values (#{pkUp,jdbcType=INTEGER}, #{tsCode,jdbcType=VARCHAR}, #{flowDays,jdbcType=INTEGER}, 
+      #{inDate,jdbcType=VARCHAR}, #{inPrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.FlowUp">
+    insert into flow_up
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkUp != null">
+        pk_up,
+      </if>
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="flowDays != null">
+        flow_days,
+      </if>
+      <if test="inDate != null">
+        in_date,
+      </if>
+      <if test="inPrice != null">
+        in_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkUp != null">
+        #{pkUp,jdbcType=INTEGER},
+      </if>
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="flowDays != null">
+        #{flowDays,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        #{inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        #{inPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.serpent.stock.beans.FlowUpExample" resultType="java.lang.Long">
+    select count(*) from flow_up
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update flow_up
+    <set>
+      <if test="record.pkUp != null">
+        pk_up = #{record.pkUp,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowDays != null">
+        flow_days = #{record.flowDays,jdbcType=INTEGER},
+      </if>
+      <if test="record.inDate != null">
+        in_date = #{record.inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inPrice != null">
+        in_price = #{record.inPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update flow_up
+    set pk_up = #{record.pkUp,jdbcType=INTEGER},
+      ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      flow_days = #{record.flowDays,jdbcType=INTEGER},
+      in_date = #{record.inDate,jdbcType=VARCHAR},
+      in_price = #{record.inPrice,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.FlowUp">
+    update flow_up
+    <set>
+      <if test="tsCode != null">
+        ts_code = #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="flowDays != null">
+        flow_days = #{flowDays,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        in_date = #{inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        in_price = #{inPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where pk_up = #{pkUp,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.FlowUp">
+    update flow_up
+    set ts_code = #{tsCode,jdbcType=VARCHAR},
+      flow_days = #{flowDays,jdbcType=INTEGER},
+      in_date = #{inDate,jdbcType=VARCHAR},
+      in_price = #{inPrice,jdbcType=DOUBLE}
+    where pk_up = #{pkUp,jdbcType=INTEGER}
+  </update>
+</mapper>

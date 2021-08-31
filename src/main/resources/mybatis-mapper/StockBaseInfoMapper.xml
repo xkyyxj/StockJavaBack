@@ -329,7 +329,14 @@
   </insert>
 
   <!-- 自定义查询 -->
-  <select id="queryLastFewDayInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select * from stock_base_info where ts_code=#{param.ts_code} order by trade_date desc limit ${param.num}
+  <select id="queryLastFewDayInfo" resultMap="BaseResultMap">
+    select * from stock_base_info where ts_code=#{ts_code} order by trade_date desc limit ${num}
+  </select>
+  <select id="queryLastDayInfos" parameterType="java.util.List" resultMap="BaseResultMap">
+    select * from stock_base_info where ts_code in (
+      <foreach collection="list" item="tsCode" separator=",">
+        #{tsCode}
+        </foreach>
+    ) and trade_date = (select trade_date from stock_index_baseinfo order by trade_date desc limit 1)
   </select>
 </mapper>

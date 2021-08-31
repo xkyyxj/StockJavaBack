@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serpent.stock.mapper.SimulateInfoMapper">
+  <resultMap id="BaseResultMap" type="com.serpent.stock.beans.SimulateInfo">
+    <id column="pk_simulate" jdbcType="INTEGER" property="pkSimulate" />
+    <result column="ts_code" jdbcType="VARCHAR" property="tsCode" />
+    <result column="in_price" jdbcType="DOUBLE" property="inPrice" />
+    <result column="in_date" jdbcType="VARCHAR" property="inDate" />
+    <result column="pct1" jdbcType="DOUBLE" property="pct1" />
+    <result column="pct2" jdbcType="DOUBLE" property="pct2" />
+    <result column="pct3" jdbcType="DOUBLE" property="pct3" />
+    <result column="pct4" jdbcType="DOUBLE" property="pct4" />
+    <result column="pct5" jdbcType="DOUBLE" property="pct5" />
+    <result column="pct15" jdbcType="DOUBLE" property="pct15" />
+    <result column="pct30" jdbcType="DOUBLE" property="pct30" />
+    <result column="in_type" jdbcType="VARCHAR" property="inType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pk_simulate, ts_code, in_price, in_date, pct1, pct2, pct3, pct4, pct5, pct15, pct30, 
+    in_type
+  </sql>
+  <select id="selectByExample" parameterType="com.serpent.stock.beans.SimulateInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from simulate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from simulate_info
+    where pk_simulate = #{pkSimulate,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from simulate_info
+    where pk_simulate = #{pkSimulate,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.serpent.stock.beans.SimulateInfoExample">
+    delete from simulate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.serpent.stock.beans.SimulateInfo">
+    insert into simulate_info (pk_simulate, ts_code, in_price, 
+      in_date, pct1, pct2, pct3, 
+      pct4, pct5, pct15, pct30, 
+      in_type)
+    values (#{pkSimulate,jdbcType=INTEGER}, #{tsCode,jdbcType=VARCHAR}, #{inPrice,jdbcType=DOUBLE}, 
+      #{inDate,jdbcType=VARCHAR}, #{pct1,jdbcType=DOUBLE}, #{pct2,jdbcType=DOUBLE}, #{pct3,jdbcType=DOUBLE}, 
+      #{pct4,jdbcType=DOUBLE}, #{pct5,jdbcType=DOUBLE}, #{pct15,jdbcType=DOUBLE}, #{pct30,jdbcType=DOUBLE}, 
+      #{inType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.serpent.stock.beans.SimulateInfo">
+    insert into simulate_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkSimulate != null">
+        pk_simulate,
+      </if>
+      <if test="tsCode != null">
+        ts_code,
+      </if>
+      <if test="inPrice != null">
+        in_price,
+      </if>
+      <if test="inDate != null">
+        in_date,
+      </if>
+      <if test="pct1 != null">
+        pct1,
+      </if>
+      <if test="pct2 != null">
+        pct2,
+      </if>
+      <if test="pct3 != null">
+        pct3,
+      </if>
+      <if test="pct4 != null">
+        pct4,
+      </if>
+      <if test="pct5 != null">
+        pct5,
+      </if>
+      <if test="pct15 != null">
+        pct15,
+      </if>
+      <if test="pct30 != null">
+        pct30,
+      </if>
+      <if test="inType != null">
+        in_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkSimulate != null">
+        #{pkSimulate,jdbcType=INTEGER},
+      </if>
+      <if test="tsCode != null">
+        #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        #{inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="inDate != null">
+        #{inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pct1 != null">
+        #{pct1,jdbcType=DOUBLE},
+      </if>
+      <if test="pct2 != null">
+        #{pct2,jdbcType=DOUBLE},
+      </if>
+      <if test="pct3 != null">
+        #{pct3,jdbcType=DOUBLE},
+      </if>
+      <if test="pct4 != null">
+        #{pct4,jdbcType=DOUBLE},
+      </if>
+      <if test="pct5 != null">
+        #{pct5,jdbcType=DOUBLE},
+      </if>
+      <if test="pct15 != null">
+        #{pct15,jdbcType=DOUBLE},
+      </if>
+      <if test="pct30 != null">
+        #{pct30,jdbcType=DOUBLE},
+      </if>
+      <if test="inType != null">
+        #{inType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.serpent.stock.beans.SimulateInfoExample" resultType="java.lang.Long">
+    select count(*) from simulate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update simulate_info
+    <set>
+      <if test="record.pkSimulate != null">
+        pk_simulate = #{record.pkSimulate,jdbcType=INTEGER},
+      </if>
+      <if test="record.tsCode != null">
+        ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inPrice != null">
+        in_price = #{record.inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.inDate != null">
+        in_date = #{record.inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pct1 != null">
+        pct1 = #{record.pct1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pct2 != null">
+        pct2 = #{record.pct2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pct3 != null">
+        pct3 = #{record.pct3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pct4 != null">
+        pct4 = #{record.pct4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pct5 != null">
+        pct5 = #{record.pct5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pct15 != null">
+        pct15 = #{record.pct15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pct30 != null">
+        pct30 = #{record.pct30,jdbcType=DOUBLE},
+      </if>
+      <if test="record.inType != null">
+        in_type = #{record.inType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update simulate_info
+    set pk_simulate = #{record.pkSimulate,jdbcType=INTEGER},
+      ts_code = #{record.tsCode,jdbcType=VARCHAR},
+      in_price = #{record.inPrice,jdbcType=DOUBLE},
+      in_date = #{record.inDate,jdbcType=VARCHAR},
+      pct1 = #{record.pct1,jdbcType=DOUBLE},
+      pct2 = #{record.pct2,jdbcType=DOUBLE},
+      pct3 = #{record.pct3,jdbcType=DOUBLE},
+      pct4 = #{record.pct4,jdbcType=DOUBLE},
+      pct5 = #{record.pct5,jdbcType=DOUBLE},
+      pct15 = #{record.pct15,jdbcType=DOUBLE},
+      pct30 = #{record.pct30,jdbcType=DOUBLE},
+      in_type = #{record.inType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serpent.stock.beans.SimulateInfo">
+    update simulate_info
+    <set>
+      <if test="tsCode != null">
+        ts_code = #{tsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inPrice != null">
+        in_price = #{inPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="inDate != null">
+        in_date = #{inDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pct1 != null">
+        pct1 = #{pct1,jdbcType=DOUBLE},
+      </if>
+      <if test="pct2 != null">
+        pct2 = #{pct2,jdbcType=DOUBLE},
+      </if>
+      <if test="pct3 != null">
+        pct3 = #{pct3,jdbcType=DOUBLE},
+      </if>
+      <if test="pct4 != null">
+        pct4 = #{pct4,jdbcType=DOUBLE},
+      </if>
+      <if test="pct5 != null">
+        pct5 = #{pct5,jdbcType=DOUBLE},
+      </if>
+      <if test="pct15 != null">
+        pct15 = #{pct15,jdbcType=DOUBLE},
+      </if>
+      <if test="pct30 != null">
+        pct30 = #{pct30,jdbcType=DOUBLE},
+      </if>
+      <if test="inType != null">
+        in_type = #{inType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pk_simulate = #{pkSimulate,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serpent.stock.beans.SimulateInfo">
+    update simulate_info
+    set ts_code = #{tsCode,jdbcType=VARCHAR},
+      in_price = #{inPrice,jdbcType=DOUBLE},
+      in_date = #{inDate,jdbcType=VARCHAR},
+      pct1 = #{pct1,jdbcType=DOUBLE},
+      pct2 = #{pct2,jdbcType=DOUBLE},
+      pct3 = #{pct3,jdbcType=DOUBLE},
+      pct4 = #{pct4,jdbcType=DOUBLE},
+      pct5 = #{pct5,jdbcType=DOUBLE},
+      pct15 = #{pct15,jdbcType=DOUBLE},
+      pct30 = #{pct30,jdbcType=DOUBLE},
+      in_type = #{inType,jdbcType=VARCHAR}
+    where pk_simulate = #{pkSimulate,jdbcType=INTEGER}
+  </update>
+</mapper>
